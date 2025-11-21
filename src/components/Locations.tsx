@@ -220,7 +220,7 @@ const Locations = () => {
                         <img
                           src={location.logo}
                           alt={`Logo ${location.name}`}
-                          className="w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 object-contain bg-white"
+                          className="w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 object-contain bg-white rounded-[22px] sm:rounded-[26px]"
                         />
                       </div>
                     </div>
