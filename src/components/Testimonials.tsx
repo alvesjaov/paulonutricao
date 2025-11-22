@@ -102,12 +102,12 @@ const Testimonials = () => {
 
     autoplayRef.current = window.setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 10000); // muda a cada 10 segundos
+    }, 20000); // muda a cada 20 segundos
 
     return () => {
       if (autoplayRef.current) window.clearInterval(autoplayRef.current);
     };
-  }, []);
+  }, [currentIndex]);
 
   return (
     <section

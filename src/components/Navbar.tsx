@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import logoPaulo from "@/assets/logo-paulo.jpg";
+
+const navLinks = [
+  { label: "Início", href: "#home" },
+  { label: "Sobre", href: "#sobre" },
+  { label: "Depoimentos", href: "#depoimentos" },
+  { label: "Locais", href: "#locations" },
+] as const;
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [activeHref, setActiveHref] = useState("#home");
-
-  const links = [
-    { label: "INÍCIO", href: "#home" },
-    { label: "SOBRE", href: "#sobre" },
-    { label: "DEPOIMENTOS", href: "#depoimentos" },
-    { label: "LOCAIS", href: "#locations" },
-  ];
 
   const handleLinkClick = (href: string) => {
     setOpen(false);
@@ -28,53 +29,61 @@ const Navbar = () => {
   return (
     <header
       data-navbar-mounted
-      className="fixed top-2 sm:top-8 md:top-2 left-1 right-1 z-50"
+      className="fixed top-0 left-0 right-0 z-50"
     >
-      <div className="container mx-auto px-4">
-        <nav className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl px-4 py-3 flex items-center justify-between shadow-md overflow-hidden">
-          <div className="flex items-center gap-4">
-            <a
-              href="#home"
-              onClick={(e) => {
-                e.preventDefault();
-                handleLinkClick("#home");
-              }}
-              className=" text-lg text-foreground tracking-wide uppercase"
-            >
-              Paulo Virgílio
-            </a>
-          </div>
+      <nav className="bg-background border border-border px-4 sm:px-8 py-4 flex items-center justify-between shadow-md overflow-hidden">
+        <div className="flex items-center gap-4">
+          {/* <img
+            src={logoPaulo}
+            alt="Atividades e nutrição"
+            className="h-12 w-auto object-contain md:h-16 mix-blend-multiply"
+            loading="lazy"
+          /> */}
+          <a
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              handleLinkClick("#home");
+            }}
+            className=" text-l text-foreground tracking-wide uppercase font-semibold"
+          >
+            Paulo Virgílio
+          </a>
+        </div>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-2">
-            {links.map((link) => (
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-2">
+          {navLinks.map((link) => {
+            const isLocations = link.href === "#locations";
+
+            return (
               <button
                 key={link.href}
                 onClick={() => handleLinkClick(link.href)}
                 className={cn(
-                  "px-4 py-2 rounded-md text-sm transition-colors uppercase tracking-wide",
-                  activeHref === link.href
+                  "px-4 py-2 rounded-md text-l transition-colors tracking-wide font-semibold",
+                  isLocations
                     ? "bg-primary text-primary-foreground shadow"
-                    : "text-foreground hover:bg-primary/5"
+                    : "text-foreground hover:text-primary"
                 )}
               >
                 {link.label}
               </button>
-            ))}
-          </div>
+            );
+          })}
+        </div>
 
-          {/* Mobile hamburger */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setOpen(true)}
-              className="p-2 rounded-md bg-primary/5"
-              aria-label="Abrir menu"
-            >
-              <Menu className="w-5 h-5" />
-            </button>
-          </div>
-        </nav>
-      </div>
+        {/* Mobile hamburger */}
+        <div className="md:hidden">
+          <button
+            onClick={() => setOpen(true)}
+            className="p-2 rounded-md bg-primary/5"
+            aria-label="Abrir menu"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+        </div>
+      </nav>
 
       {/* Mobile menu overlay */}
       {open && (
@@ -98,20 +107,24 @@ const Navbar = () => {
               </div>
 
               <div className="flex flex-col">
-                {links.map((link) => (
-                  <button
-                    key={link.href}
-                    onClick={() => handleLinkClick(link.href)}
-                    className={cn(
-                      "w-full px-4 py-3 rounded-xl text-base tracking-wide text-left uppercase",
-                      activeHref === link.href
-                        ? "bg-primary text-primary-foreground"
-                        : "text-foreground hover:bg-primary/5"
-                    )}
-                  >
-                    {link.label}
-                  </button>
-                ))}
+                {navLinks.map((link) => {
+                  const isLocations = link.href === "#locations";
+
+                  return (
+                    <button
+                      key={link.href}
+                      onClick={() => handleLinkClick(link.href)}
+                      className={cn(
+                        "w-full px-4 py-3 rounded-xl text-base tracking-wide text-left font-semibold",
+                        isLocations
+                          ? "bg-primary text-primary-foreground"
+                          : "text-foreground hover:text-primary"
+                      )}
+                    >
+                      {link.label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>

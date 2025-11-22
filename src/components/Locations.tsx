@@ -159,7 +159,7 @@ const Locations = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6">
               <MapPin className="w-4 h-4" />
               <span className="text-sm font-medium">Atendimento Presencial</span>
@@ -184,10 +184,12 @@ const Locations = () => {
           </div>
 
           <div className="space-y-8">
-            {locations.map((location, index) => (
+            {locations.map((location, index) => {
+              const isNearest = nearestLocation?.id === location.id;
+              return (
               <Card
                 key={location.id}
-                className={`group relative overflow-hidden transition-all duration-500 hover:shadow-2xl animate-fade-in ${nearestLocation?.id === location.id
+                className={`group relative overflow-hidden transition-all duration-500 animate-fade-in ${isNearest
                     ? "ring-2 ring-primary shadow-xl"
                     : ""
                   }`}
@@ -196,10 +198,12 @@ const Locations = () => {
                 }}
               >
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {isNearest && (
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent" />
+                )}
 
                 {/* Badge 'Mais Próximo' */}
-                {nearestLocation?.id === location.id && (
+                {isNearest && (
                   <Badge className="absolute top-4 right-4 bg-accent shadow-lg">
                     <PinIcon className="w-3 h-3 mr-1" />
                     Mais Próximo
@@ -279,7 +283,8 @@ const Locations = () => {
                   </div>
                 </div>
               </Card>
-            ))}
+            );
+            })}
           </div>
 
           {locationPermission === "denied" && (
