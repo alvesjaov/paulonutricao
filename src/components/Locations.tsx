@@ -160,7 +160,7 @@ const Locations = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-2">
               <MapPin className="w-4 h-4" />
               <span className="text-sm font-medium">Atendimento Presencial</span>
             </div>

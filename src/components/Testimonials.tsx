@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
 import transformation1 from "@/assets/transformation-1.jpg";
 import transformation2 from "@/assets/transformation-2.jpg";
 import transformation3 from "@/assets/transformation-3.jpg";
+import { cn } from "@/lib/utils";
 
 interface Testimonial {
   id: number;
@@ -22,7 +23,6 @@ const testimonials: Testimonial[] = [
     id: 1,
     name: "Carlos Silva",
     age: 35,
-    result: "Perdeu 18kg em 4 meses",
     testimonial:
       "A consultoria do Paulo mudou completamente minha relação com a comida. Aprendi a comer de forma saudável sem abrir mão do sabor. Os resultados superaram minhas expectativas!",
     image: transformation1,
@@ -32,7 +32,6 @@ const testimonials: Testimonial[] = [
     id: 2,
     name: "Mariana Santos",
     age: 28,
-    result: "Ganhou 5kg de massa magra",
     testimonial:
       "Como atleta, eu precisava de um acompanhamento especializado. O Paulo entende de nutrição esportiva como ninguém. Minha performance melhorou drasticamente!",
     image: transformation2,
@@ -42,7 +41,6 @@ const testimonials: Testimonial[] = [
     id: 3,
     name: "Roberto Oliveira",
     age: 42,
-    result: "Transformação completa em 6 meses",
     testimonial:
       "Depois dos 40, achei que seria impossível ter o corpo que sempre quis. O Paulo provou que com a nutrição certa e dedicação, tudo é possível. Gratidão eterna!",
     image: transformation3,
@@ -77,6 +75,8 @@ const testimonials: Testimonial[] = [
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const autoplayRef = useRef<number | null>(null);
+  const cardRef = useRef<HTMLDivElement | null>(null);
+  const [preferredHeight, setPreferredHeight] = useState<number | null>(null);
 
   const nextTestimonial = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -109,6 +109,31 @@ const Testimonials = () => {
     };
   }, [currentIndex]);
 
+  useLayoutEffect(() => {
+    if (!cardRef.current) return;
+    const measuredHeight = cardRef.current.getBoundingClientRect().height;
+
+    setPreferredHeight((prev) => {
+      if (hasImage) return measuredHeight;
+      return prev ?? measuredHeight;
+    });
+  }, [currentIndex, hasImage]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (!cardRef.current) return;
+      const measuredHeight = cardRef.current.getBoundingClientRect().height;
+
+      setPreferredHeight((prev) => {
+        if (hasImage) return measuredHeight;
+        return prev ?? measuredHeight;
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [hasImage]);
+
   return (
     <section
       id="depoimentos"
@@ -117,7 +142,7 @@ const Testimonials = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Cabeçalho */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6">
               <Star className="w-4 h-4 fill-primary" />
               <span className="text-sm font-medium">Resultados Reais</span>
@@ -134,17 +159,19 @@ const Testimonials = () => {
           {/* Carrossel */}
           <div className="relative">
             <Card
-              className="
-                relative
-                overflow-hidden shadow-2xl bg-card
-                min-h-[420px] md:min-h-[420px]
-                flex items-stretch
-              "
+              ref={cardRef}
+              style={preferredHeight ? { minHeight: `${preferredHeight}px` } : undefined}
+              className={cn(
+                "relative overflow-hidden shadow-2xl bg-card min-h-[340px] md:min-h-[420px]",
+                hasImage
+                  ? "flex items-stretch"
+                  : "grid place-items-center max-w-3xl mx-auto"
+              )}
             >
               {hasImage ? (
                 // COM IMAGEM
                 <div className="grid md:grid-cols-2 w-full h-full">
-                  <div className="relative h-[380px] md:h-full">
+                  <div className="relative h-[280px] sm:h-[340px] md:h-full">
                     <img
                       src={current.image}
                       alt={current.name}
@@ -158,7 +185,7 @@ const Testimonials = () => {
                     )}
                   </div>
 
-                  <div className="p-8 md:p-12 flex flex-col justify-center">
+                  <div className="p-6 md:p-12 flex flex-col justify-center">
                     <div className="max-w-xl">
                       <Quote className="w-12 h-12 text-primary/20 mb-4" />
 
@@ -183,7 +210,7 @@ const Testimonials = () => {
                 </div>
               ) : (
                 // SÓ TEXTO — FORMATAÇÃO ALINHADA
-                <div className="w-full h-full flex items-center justify-center px-8 md:px-16 py-12">
+                <div className="w-full h-full flex items-center justify-center px-6 md:px-16 py-10 md:py-12">
                   <div className="max-w-2xl w-full mx-auto">
                     <Quote className="w-12 h-12 text-primary/20 mb-4" />
 
@@ -206,7 +233,7 @@ const Testimonials = () => {
               )}
 
               {/* Botões fixos (mesmo lugar em todos os slides) */}
-              <div className="absolute bottom-8 right-8 flex gap-2">
+              <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 flex gap-2">
                 <Button
                   variant="outline"
                   size="icon"
@@ -228,7 +255,7 @@ const Testimonials = () => {
             </Card>
 
             {/* Pontinhos do carrossel */}
-            <div className="flex justify-center gap-2 mt-8">
+            <div className="flex justify-center gap-2 mt-4">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
