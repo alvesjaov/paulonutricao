@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import logoNaturalLife from "@/assets/logo-natural-life.jpg";
 import logoErghos from "@/assets/logo-erghos.jpg";
 import logoMirelleSantos from "@/assets/logo-mirelle-santos.jpg";
+import logoClinicaEssencial from "@/assets/logo-clinica-essecial.jpg";
 import logoAme from "@/assets/logo-ame.jpg";
 
 interface Location {
@@ -18,65 +19,59 @@ interface Location {
   whatsapp: string;
   coordinates: { lat: number; lng: number };
   logo: string;
-  hours: string;
-  specialties: string[];
-  mapEmbed: string;
 }
 
 // CONFIGURAÇÃO DAS LOCALIZAÇÕES
-// Edite aqui: WhatsApp, horários, especialidades e URLs dos mapas
 const locations: Location[] = [
   {
     id: "brumado",
     city: "Brumado",
     name: "Natural Life",
-    address: "Brumado, BA",
+    address: "Rua Cassimiro Pinheiro de Azevedo, 240 - Centro, Brumado - BA",
     phone: "(77) 99817-849",
-    whatsapp: "557799817849", // EDITE: Número WhatsApp
-    coordinates: { lat: -14.2034, lng: -41.6653 },
+    whatsapp: "557799817849",
+    coordinates: { lat: -14.206683, lng: -41.668224 },
     logo: logoNaturalLife,
-    hours: "Seg-Sex: 8h às 18h | Sáb: 8h às 12h", // EDITE: Horários de atendimento
-    specialties: ["Nutrição Clínica", "Nutrição Esportiva", "Emagrecimento", "Reeducação Alimentar"], // EDITE: Especialidades
-    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123456.789!2d-41.6653!3d-14.2034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDEyJzEyLjIiUyA0McKwMzknNTUuMSJX!5e0!3m2!1spt-BR!2sbr!4v1234567890" // EDITE: URL do iframe do Google Maps
   },
   {
     id: "livramento",
-    city: "Livramento",
+    city: "Livramento de Nossa Senhora",
     name: "Academia Erghos",
-    address: "Livramento de Nossa Senhora, BA",
+    address: "Rua Edmundo Rodrigues Meira, 40 - Centro, Livramento de Nossa Senhora - BA",
     phone: "(77) 99554-458",
-    whatsapp: "5577999554458", // EDITE: Número WhatsApp
+    whatsapp: "5577999554458",
     coordinates: { lat: -13.6378, lng: -41.8404 },
     logo: logoErghos,
-    hours: "Seg-Sex: 7h às 19h | Sáb: 7h às 13h", // EDITE: Horários
-    specialties: ["Nutrição Esportiva", "Ganho de Massa", "Performance Atlética", "Suplementação"], // EDITE: Especialidades
-    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123456.789!2d-41.8404!3d-13.6378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDM4JzE2LjEiUyA0McKwNTAnMjUuNCJX!5e0!3m2!1spt-BR!2sbr!4v1234567890" // EDITE: URL do Google Maps
   },
   {
     id: "malhada",
-    city: "Malhada",
+    city: "Malhada de Pedras",
     name: "Mirelle Santos - Saúde, Fisioterapia & Pilates",
-    address: "Malhada, BA",
+    address: "Rua Bela Vista, 68 - Centro, Malhada de Pedras - BA",
     phone: "(77) 98833-1865",
-    whatsapp: "5577988331865", // EDITE: Número WhatsApp
-    coordinates: { lat: -14.3431, lng: -43.7709 },
+    whatsapp: "5577988331865",
+    coordinates: { lat: -14.39038155479054, lng: -41.878528099862976 },
     logo: logoMirelleSantos,
-    hours: "Seg-Sex: 8h às 17h | Sáb: 8h às 12h", // EDITE: Horários
-    specialties: ["Nutrição Funcional", "Fitoterapia", "Saúde Integrativa", "Emagrecimento Saudável"], // EDITE: Especialidades
-    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123456.789!2d-43.7709!3d-14.3431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDIwJzM1LjIiUyA0M8KwNDYnMTUuMiJX!5e0!3m2!1spt-BR!2sbr!4v1234567890" // EDITE: URL do Google Maps
   },
+  // {
+  //   id: "malhada",
+  //   city: "Malhada de Pedras",
+  //   name: "Clinica Essencial - Saúde Integrativa",
+  //   address: "Rua Bela Vista, 68 - Centro, Malhada de Pedras - BA",
+  //   phone: "(77) 98833-1865",
+  //   whatsapp: "5577988331865",
+  //   coordinates: { lat: -14.39038155479054, lng: -41.878528099862976 },
+  //   logo: logoClinicaEssencial,
+  // },
   {
     id: "ibitira",
-    city: "Ibitiara", // Corrigido o nome da cidade
+    city: "Ibitira",
     name: "AME - Clínica Médica Integrada",
-    address: "Ibitiara, BA",
+    address: "Rua Joaquim Gonçalves, s/n, Ibitira, Rio do Antônio - BA",
     phone: "(77) 98858-6055",
-    whatsapp: "5577988586055", // EDITE: Número WhatsApp
-    coordinates: { lat: -14.4633, lng: -42.2156 },
+    whatsapp: "5577988586055",
+    coordinates: { lat: -14.20731909829922, lng: -42.113622799782355 },
     logo: logoAme,
-    hours: "Seg-Sex: 8h às 18h | Sáb: 8h às 12h", // EDITE: Horários
-    specialties: ["Nutrição Clínica", "Atendimento Multidisciplinar", "Saúde Preventiva", "Bem-estar"], // EDITE: Especialidades
-    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123456.789!2d-42.2156!3d-14.4633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDI3JzQ3LjkiUyA0MsKwMTInNTYuMiJX!5e0!3m2!1spt-BR!2sbr!4v1234567890" // EDITE: URL do Google Maps
   }
 ];
 
@@ -161,7 +156,7 @@ const Locations = () => {
     <section id="locations" className="py-20 bg-background relative overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -175,11 +170,11 @@ const Locations = () => {
             <p className="text-xl text-muted-foreground mb-6 max-w-2xl mx-auto">
               Atendimento personalizado em 4 cidades da Bahia
             </p>
-            
+
             {locationPermission === "prompt" && (
-              <Button 
-                onClick={requestLocation} 
-                variant="outline" 
+              <Button
+                onClick={requestLocation}
+                variant="outline"
                 className="gap-2 hover:bg-primary hover:text-primary-foreground transition-all"
               >
                 <Navigation className="w-4 h-4" />
@@ -192,11 +187,10 @@ const Locations = () => {
             {locations.map((location, index) => (
               <Card
                 key={location.id}
-                className={`group relative overflow-hidden transition-all duration-500 hover:shadow-2xl animate-fade-in ${
-                  nearestLocation?.id === location.id
+                className={`group relative overflow-hidden transition-all duration-500 hover:shadow-2xl animate-fade-in ${nearestLocation?.id === location.id
                     ? "ring-2 ring-primary shadow-xl"
                     : ""
-                }`}
+                  }`}
                 style={{
                   animationDelay: `${index * 150}ms`,
                 }}
@@ -211,7 +205,7 @@ const Locations = () => {
                     Mais Próximo
                   </Badge>
                 )}
-                
+
                 <div className="relative grid md:grid-cols-4 gap-6">
                   {/* Logo Column (sem foto de fachada) */}
                   <div className="md:col-span-1 flex items-center justify-center p-6">

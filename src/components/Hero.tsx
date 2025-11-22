@@ -10,13 +10,13 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-[90vh] flex items-center overflow-hidden">
+    <section id="home" className="relative min-h-[95vh] flex items-center overflow-hidden bg-background">
       {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 hidden md:block">
         <img
           src={heroImage}
           alt="Nutrição e Saúde"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transform scale-95 md:scale-90"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/60" />
       </div>
