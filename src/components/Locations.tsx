@@ -140,14 +140,14 @@ const Locations = () => {
   };
 
   // Chama apenas uma vez no mount; desabilitamos regra de deps para evitar múltiplas chamadas intencionais
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     requestLocation();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleWhatsAppClick = (location: Location) => {
     const message = encodeURIComponent(
-      `Olá! Gostaria de agendar uma consulta em ${location.city} - ${location.name}`
+      `Olá! Gostaria de agendar uma consulta com o Nutricionista Paulo Virgílio.`
     );
     window.open(`https://wa.me/${location.whatsapp}?text=${message}`, "_blank");
   };

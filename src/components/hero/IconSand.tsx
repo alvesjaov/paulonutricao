@@ -124,7 +124,7 @@ const buildIconSandMobile = (cols: number, rows: number, density: number) => {
             const jitterY = (pseudoRandom(seed + 400) - 0.5) * 2;
 
             const size = 16 + Math.round(pseudoRandom(seed + 500) * 3) * 5;
-            const opacity = 0.175
+            const opacity = 0.1
 
             const top = topBase + jitterY;
             const left = leftBase + jitterX;
