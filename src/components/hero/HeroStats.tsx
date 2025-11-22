@@ -22,7 +22,7 @@ const HeroStats = () => (
           suffix={suffix}
           className="text-3xl md:text-4xl font-bold text-primary"
         />
-        <p className="text-sm text-muted-foreground mt-1">{label}</p>
+        <p className="text-sm text-foreground mt-1">{label}</p>
       </div>
     ))}
   </div>

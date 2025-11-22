@@ -36,7 +36,7 @@ const Hero = () => {
             Nutricionista Esportivo e Clínico
           </p>
 
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+          <p className="text-lg text-foreground mb-8 max-w-2xl leading-relaxed">
             Transforme sua saúde com acompanhamento nutricional personalizado.
             Especialista em nutrição esportiva, clínica e fitoterapia.
           </p>
