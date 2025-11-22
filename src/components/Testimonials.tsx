@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { ChevronLeft, ChevronRight, Star, Quote, Maximize2, X } from "lucide-react";
 import transformation1 from "@/assets/transformation-1.jpg";
 import transformation2 from "@/assets/transformation-2.jpg";
 import transformation3 from "@/assets/transformation-3.jpg";
@@ -77,12 +78,15 @@ const Testimonials = () => {
   const autoplayRef = useRef<number | null>(null);
   const cardRef = useRef<HTMLDivElement | null>(null);
   const [preferredHeight, setPreferredHeight] = useState<number | null>(null);
+  const [isImageExpanded, setIsImageExpanded] = useState(false);
 
   const nextTestimonial = () => {
+    if (isImageExpanded) return;
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
   };
 
   const prevTestimonial = () => {
+    if (isImageExpanded) return;
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
@@ -99,6 +103,7 @@ const Testimonials = () => {
   // autoplay
   useEffect(() => {
     if (autoplayRef.current) window.clearInterval(autoplayRef.current);
+    if (isImageExpanded) return;
 
     autoplayRef.current = window.setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -107,7 +112,7 @@ const Testimonials = () => {
     return () => {
       if (autoplayRef.current) window.clearInterval(autoplayRef.current);
     };
-  }, [currentIndex]);
+  }, [currentIndex, isImageExpanded]);
 
   useLayoutEffect(() => {
     if (!cardRef.current) return;
@@ -171,19 +176,44 @@ const Testimonials = () => {
               {hasImage ? (
                 // COM IMAGEM
                 <div className="grid md:grid-cols-2 w-full h-full">
-                  <div className="relative h-[280px] sm:h-[340px] md:h-full">
-                    <img
-                      src={current.image}
-                      alt={current.name}
-                      className="w-full h-full object-cover"
-                    />
+                  <Dialog open={isImageExpanded} onOpenChange={setIsImageExpanded}>
+                    <DialogTrigger asChild>
+                      <button
+                        type="button"
+                        className="relative h-[260px] sm:h-[320px] md:h-full w-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 text-primary"
+                        aria-label="Expandir imagem de transformação"
+                      >
+                        <img
+                          src={current.image}
+                          alt={current.name}
+                          className="w-full h-full object-cover rounded-t-xl md:rounded-none"
+                        />
 
-                    {current.result && (
-                      <div className="absolute top-4 left-4 bg-primary text-primary-foreground px-4 py-2 rounded-full font-semibold shadow-lg">
-                        {current.result}
-                      </div>
-                    )}
-                  </div>
+                        {current.result && (
+                          <div className="absolute top-4 left-4 bg-primary text-primary-foreground px-4 py-2 rounded-full font-semibold shadow-lg">
+                            {current.result}
+                          </div>
+                        )}
+
+                        <span className="absolute top-4 right-4 inline-flex items-center gap-1 rounded-full bg-background/80 px-3 py-1 text-xs font-semibold text-foreground shadow">
+                          <Maximize2 className="h-3.5 w-3.5" />
+                          <span>Expandir</span>
+                        </span>
+                      </button>
+                    </DialogTrigger>
+
+                    <DialogContent
+                      className="max-w-4xl w-[90vw] max-h-[90vh] p-0 border-none bg-transparent shadow-none rounded-xl sm:rounded-2xl overflow-hidden"
+                      closeButtonClassName="right-2 top-2 sm:right-4 sm:top-4 p-2 text-primary hover:text-primary/80 focus:ring-0 focus:ring-offset-0"
+                      closeIcon={<X className="h-6 w-6" strokeWidth={3} />}
+                    >
+                      <img
+                        src={current.image}
+                        alt={current.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </DialogContent>
+                  </Dialog>
 
                   <div className="p-6 md:p-12 flex flex-col justify-center">
                     <div className="max-w-xl">
@@ -238,7 +268,8 @@ const Testimonials = () => {
                   variant="outline"
                   size="icon"
                   onClick={prevTestimonial}
-                  className="rounded-full hover:bg-primary hover:text-primary-foreground"
+                  disabled={isImageExpanded}
+                  className="rounded-full hover:bg-primary hover:text-primary-foreground disabled:pointer-events-none disabled:opacity-50"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </Button>
@@ -247,7 +278,8 @@ const Testimonials = () => {
                   variant="outline"
                   size="icon"
                   onClick={nextTestimonial}
-                  className="rounded-full hover:bg-primary hover:text-primary-foreground"
+                  disabled={isImageExpanded}
+                  className="rounded-full hover:bg-primary hover:text-primary-foreground disabled:pointer-events-none disabled:opacity-50"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </Button>
@@ -259,12 +291,16 @@ const Testimonials = () => {
               {testimonials.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`h-2 rounded-full transition-all ${
+                  onClick={() => {
+                    if (!isImageExpanded) setCurrentIndex(index);
+                  }}
+                  disabled={isImageExpanded}
+                  className={cn(
+                    "h-2 rounded-full transition-all disabled:cursor-not-allowed disabled:opacity-40",
                     index === currentIndex
                       ? "w-8 bg-primary"
                       : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                  }`}
+                  )}
                   aria-label={`Ver depoimento ${index + 1}`}
                 />
               ))}
