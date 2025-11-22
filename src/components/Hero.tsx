@@ -44,7 +44,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <Button
               size="lg"
-              className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all"
+              className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all text-white"
               onClick={scrollToLocations}
             >
               <MapPin className="w-5 h-5 mr-2" />

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import logoPaulo from "@/assets/logo-paulo.jpg";
+import { useTheme } from "next-themes";
 
 const navLinks = [
   { label: "Início", href: "#home" },
@@ -13,6 +13,12 @@ const navLinks = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [activeHref, setActiveHref] = useState("#home");
+  const { resolvedTheme, setTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleLinkClick = (href: string) => {
     setOpen(false);
@@ -26,12 +32,36 @@ const Navbar = () => {
     }
   };
 
+  const handleToggleTheme = () => {
+    if (!isMounted) return;
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  };
+
+  const renderThemeIcon = () => {
+    if (!isMounted) {
+      return <div className="h-5 w-5 animate-pulse rounded-full bg-muted" />;
+    }
+
+    return resolvedTheme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />;
+  };
+
+  const ThemeToggle = () => (
+    <button
+      type="button"
+      onClick={handleToggleTheme}
+      className="p-2 rounded-md text-foreground hover:bg-primary/10 transition-colors"
+      aria-label="Alternar modo claro/escuro"
+    >
+      {renderThemeIcon()}
+    </button>
+  );
+
   return (
     <header
       data-navbar-mounted
       className="fixed top-0 left-0 right-0 z-50"
     >
-      <nav className="bg-background border border-border px-4 sm:px-8 py-4 flex items-center justify-between shadow-md overflow-hidden">
+      <nav className="bg-background px-4 sm:px-8 py-4 flex items-center justify-between shadow-md overflow-hidden">
         <div className="flex items-center gap-4">
           {/* <img
             src={logoPaulo}
@@ -51,37 +81,39 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-2">
-          {navLinks.map((link) => {
-            const isLocations = link.href === "#locations";
+        <div className="flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2">
+            {navLinks.map((link) => {
+              const isLocations = link.href === "#locations";
 
-            return (
-              <button
-                key={link.href}
-                onClick={() => handleLinkClick(link.href)}
-                className={cn(
-                  "px-4 py-2 rounded-md text-l transition-colors tracking-wide font-semibold",
-                  isLocations
-                    ? "bg-primary text-primary-foreground shadow"
-                    : "text-foreground hover:text-primary"
-                )}
-              >
-                {link.label}
-              </button>
-            );
-          })}
-        </div>
+              return (
+                <button
+                  key={link.href}
+                  onClick={() => handleLinkClick(link.href)}
+                  className={cn(
+                    "px-4 py-2 rounded-md text-l transition-colors tracking-wide font-semibold",
+                    isLocations
+                      ? "bg-primary text-white shadow"
+                      : "text-foreground hover:text-primary"
+                  )}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
+          </div>
 
-        {/* Mobile hamburger */}
-        <div className="md:hidden">
-          <button
-            onClick={() => setOpen(true)}
-            className="p-2 rounded-md bg-primary/5"
-            aria-label="Abrir menu"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
+          <ThemeToggle />
+
+          <div className="md:hidden">
+            <button
+              onClick={() => setOpen(true)}
+              className="p-2 rounded-md bg-primary/5"
+              aria-label="Abrir menu"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -117,7 +149,7 @@ const Navbar = () => {
                       className={cn(
                         "w-full px-4 py-3 rounded-xl text-base tracking-wide text-left font-semibold",
                         isLocations
-                          ? "bg-primary text-primary-foreground"
+                          ? "bg-primary text-white"
                           : "text-foreground hover:text-primary"
                       )}
                     >
@@ -125,6 +157,11 @@ const Navbar = () => {
                     </button>
                   );
                 })}
+              </div>
+
+              <div className="mt-auto border-t border-border pt-6 flex items-center justify-between text-sm font-medium text-muted-foreground">
+                <span>{isMounted && resolvedTheme === "dark" ? "Modo escuro" : "Modo claro"}</span>
+                <ThemeToggle />
               </div>
             </div>
           </div>

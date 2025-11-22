@@ -175,7 +175,7 @@ const Locations = () => {
               <Button
                 onClick={requestLocation}
                 variant="outline"
-                className="gap-2 hover:bg-primary hover:text-primary-foreground transition-all"
+                className="gap-2 border-border text-primary hover:bg-primary hover:text-primary-foreground transition-all dark:border-white dark:text-white dark:bg-transparent"
               >
                 <Navigation className="w-4 h-4" />
                 Encontrar Local Mais Próximo
@@ -204,7 +204,7 @@ const Locations = () => {
 
                 {/* Badge 'Mais Próximo' */}
                 {isNearest && (
-                  <Badge className="absolute top-4 right-4 bg-accent shadow-lg">
+                  <Badge className="absolute top-4 right-4 bg-accent text-white shadow-lg">
                     <PinIcon className="w-3 h-3 mr-1" />
                     Mais Próximo
                   </Badge>

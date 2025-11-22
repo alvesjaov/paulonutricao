@@ -152,7 +152,7 @@ const Testimonials = () => {
                     />
 
                     {current.result && (
-                      <div className="absolute top-4 left-4 bg-primary text-primary-foreground px-4 py-2 rounded-full font-semibold shadow-lg">
+                      <div className="absolute top-4 left-4 bg-primary text-white px-4 py-2 rounded-full font-semibold shadow-lg">
                         {current.result}
                       </div>
                     )}
@@ -211,7 +211,7 @@ const Testimonials = () => {
                   variant="outline"
                   size="icon"
                   onClick={prevTestimonial}
-                  className="rounded-full hover:bg-primary hover:text-primary-foreground"
+                  className="rounded-full border-white text-white bg-transparent hover:bg-primary hover:text-primary-foreground"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </Button>
@@ -220,7 +220,7 @@ const Testimonials = () => {
                   variant="outline"
                   size="icon"
                   onClick={nextTestimonial}
-                  className="rounded-full hover:bg-primary hover:text-primary-foreground"
+                  className="rounded-full border-white text-white bg-transparent hover:bg-primary hover:text-primary-foreground"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </Button>
