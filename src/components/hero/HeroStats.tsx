@@ -7,7 +7,7 @@ type StatConfig = {
 };
 
 const stats: StatConfig[] = [
-  { end: 1000, suffix: "+", label: "Pacientes Atendidos" },
+  { end: 4000, suffix: "+", label: "Pacientes Atendidos" },
   { end: 95, suffix: "%", label: "Taxa de Sucesso" },
   { end: 10, suffix: "+", label: "Anos de Experiência" },
   { end: 4, label: "Locais de Atendimento" },

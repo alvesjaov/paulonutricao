@@ -25,7 +25,7 @@ const Hero = () => {
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/70 text-white mb-6">
             <Award className="w-4 h-4" />
-            <span className="text-sm font-medium">CRN 7995/P</span>
+            <span className="text-sm font-medium">CRN 7995</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">

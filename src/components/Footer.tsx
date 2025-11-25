@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="space-y-3">
             <h3 className="text-2xl font-bold text-background">Paulo Virgílio</h3>
             <p>Nutricionista Esportivo e Clínico</p>
-            <p className="text-background/60">CRN 7995/P</p>
+            <p className="text-background/60">CRN 7995</p>
             <p className="text-background/60">
               Transformando hábitos alimentares com estratégias objetivas e resultados sustentáveis.
             </p>
