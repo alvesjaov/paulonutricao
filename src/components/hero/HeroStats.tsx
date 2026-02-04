@@ -10,7 +10,7 @@ const stats: StatConfig[] = [
   { end: 4000, suffix: "+", label: "Pacientes Atendidos" },
   { end: 95, suffix: "%", label: "Taxa de Sucesso" },
   { end: 10, suffix: "+", label: "Anos de Experiência" },
-  { end: 4, label: "Locais de Atendimento" },
+  { end: 5, label: "Locais de Atendimento" },
 ];
 
 const HeroStats = () => (

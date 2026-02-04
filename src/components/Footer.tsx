@@ -29,13 +29,13 @@ const Footer = () => {
               <Phone className="w-4 h-4" />
               (77) 99817-849
             </a>
-            <a
-              href="mailto:contato@paulovirgilio.com.br"
+            <span
+             // href="mailto: paulonutri@outlook.com"
               className="flex items-center gap-2 hover:text-background transition-colors"
             >
               <Mail className="w-4 h-4" />
-              contato@paulovirgilio.com.br
-            </a>
+               paulonutri@outlook.com
+            </span>
           </div>
 
           {/* REDES SOCIAIS */}

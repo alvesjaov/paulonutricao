@@ -9,6 +9,7 @@ import logoErghos from "@/assets/logo-erghos.jpg";
 import logoMirelleSantos from "@/assets/logo-mirelle-santos.jpg";
 import logoClinicaEssencial from "@/assets/logo-clinica-essecial.jpg";
 import logoAme from "@/assets/logo-ame.jpg";
+import logoClinicaViver from "@/assets/clinicavicer_aracatu.jpg";
 
 interface Location {
   id: string;
@@ -23,12 +24,22 @@ interface Location {
 
 // CONFIGURAÇÃO DAS LOCALIZAÇÕES
 const locations: Location[] = [
+    {
+    id: "aracatu",
+    city: "Aracatu",
+    name: "Clínica Viver",
+    address: "Praça Cel. Cândido Silveira Santos, Aracatu - BA",
+    phone: "(77) 98165-6650",
+    whatsapp: "5577981656650",
+    coordinates: { lat: -14.429133851870352, lng: -41.460971471467865 },
+    logo: logoClinicaViver,
+  },
   {
     id: "brumado",
     city: "Brumado",
     name: "Natural Life",
     address: "Rua Cassimiro Pinheiro de Azevedo, 240 - Centro, Brumado - BA",
-    phone: "(77) 99817-849",
+    phone: "(77) 99981-7849",
     whatsapp: "557799817849",
     coordinates: { lat: -14.206683, lng: -41.668224 },
     logo: logoNaturalLife,
@@ -38,7 +49,7 @@ const locations: Location[] = [
     city: "Livramento de Nossa Senhora",
     name: "Academia Erghos",
     address: "Rua Edmundo Rodrigues Meira, 40 - Centro, Livramento de Nossa Senhora - BA",
-    phone: "(77) 99554-458",
+    phone: "(77) 99955-4458",
     whatsapp: "5577999554458",
     coordinates: { lat: -13.6378, lng: -41.8404 },
     logo: logoErghos,

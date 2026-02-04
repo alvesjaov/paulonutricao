@@ -1,7 +1,6 @@
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import About from "@/components/About";
-import Testimonials from "@/components/Testimonials";
 import Locations from "@/components/Locations";
 import Footer from "@/components/Footer";
 
@@ -11,7 +10,7 @@ const Index = () => {
       <Navbar />
       <Hero />
       <About />
-      <Testimonials />
+      {/* Testimonials temporarily hidden per request */}
       <Locations />
       <Footer />
     </div>

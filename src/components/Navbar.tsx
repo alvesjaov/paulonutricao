@@ -6,8 +6,8 @@ import logoPaulo from "@/assets/logo-paulo.jpg";
 const navLinks = [
   { label: "Início", href: "#home" },
   { label: "Sobre", href: "#sobre" },
-  { label: "Depoimentos", href: "#depoimentos" },
-  { label: "Locais", href: "#locations" },
+  // Testimonials temporarily hidden per request
+  { label: "Locais de Atendimento", href: "#locations" },
 ] as const;
 
 const Navbar = () => {
