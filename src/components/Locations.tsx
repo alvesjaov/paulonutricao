@@ -169,7 +169,7 @@ const Locations = () => {
               Escolha o Local Mais Próximo
             </h2>
             <p className="text-xl text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Atendimento personalizado em 4 cidades da Bahia
+              Atendimento personalizado em 5 cidades da Bahia
             </p>
 
             {locationPermission === "prompt" && (

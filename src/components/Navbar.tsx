@@ -7,7 +7,7 @@ const navLinks = [
   { label: "Início", href: "#home" },
   { label: "Sobre", href: "#sobre" },
   // Testimonials temporarily hidden per request
-  { label: "Locais de Atendimento", href: "#locations" },
+  { label: "Locais", href: "#locations" },
 ] as const;
 
 const Navbar = () => {
