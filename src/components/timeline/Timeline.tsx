@@ -79,7 +79,7 @@ const Timeline = () => {
         <div className="hidden md:block absolute left-1/2 top-0 h-full w-[2px] bg-primary/15 -translate-x-1/2 rounded-full" />
 
         {/* LINHA MOBILE */}
-        <div className="md:hidden absolute left-6 top-0 h-full w-[2px] bg-primary/15 rounded-full" />
+        <div className="md:hidden absolute left-5 top-0 h-full w-[2px] bg-primary/15 rounded-full" />
 
         <div className="space-y-4 md:space-y-6">
           {timeline.map((item, index) => (
